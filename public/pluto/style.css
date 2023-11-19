@@ -3273,7 +3273,7 @@ table.projects tr td:first-child {
     min-height: 540px;
     width: 100%;
     box-shadow: 0px 0 10px -8px #000;
-    margin: 0px;
+    margin: 5%;
     padding: 0;
     border-radius: 10px;
     overflow: hidden;

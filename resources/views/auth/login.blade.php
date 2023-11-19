@@ -109,7 +109,6 @@
         @endif
 
 
-    <div class="container">
         
         <div class="center verticle_center">
            <div class="login_section" style="box-shadow: 0px 0px 15px 1.5px #747f8a !important;min-height:50px;height:80% !important;max-width:100% !important; width:350px !important; border-radius: 0px;background-color: rgba(255, 255, 255, 0.877) !important">
@@ -206,8 +205,8 @@
               </div>
            </div>
         </div>
-     </div>
-    </div>
+   
+   
 
     <script>
         $(document).ready(function () {

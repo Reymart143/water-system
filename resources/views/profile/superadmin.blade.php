@@ -27,7 +27,34 @@
                           <!-- profile image -->
                           <div class="col-lg-12 mb-4 mt-4">
                              <div class="full centered-container">
-                                <div class="picture" ><img width="180" id="profilePicture" class="rounded-circle" style="margin-top:10px;width: 200px; height: 190px; border-radius: 50%; object-fit: cover;margin-left:100px" src="{{ asset('storage/' . Auth::user()->image) }}" alt="#" /></div>
+                                <div class="picture">
+                                    <a data-fancybox="profile-gallery" href="{{ asset('storage/' . Auth::user()->image) }}" data-toggle="tooltip" title="Click to view">
+                                        <img
+                                            width="180"
+                                            id="profilePicture"
+                                            class="rounded-circle"
+                                            style="margin-top: 10px; width: 200px; height: 190px; border-radius: 50%; object-fit: cover; margin-left: 100px"
+                                            src="{{ asset('storage/' . Auth::user()->image) }}"
+                                            alt="#"
+                                        />
+                                    </a>
+                                </div>
+                                
+                                <script>
+                                    $(document).ready(function () {
+                                        $('[data-toggle="tooltip"]').tooltip({
+                                            template: '<div class="tooltip larger-tooltip" role="tooltip"><div class="arrow"></div><div class="tooltip-inner"></div></div>',
+                                            html: true
+                                        });
+                                    });
+                                </script>
+                                
+                                <style>
+                                    .larger-tooltip .tooltip-inner {
+                                        max-width: 300px; 
+                                        font-size: 16px; 
+                                    }
+                                </style>
                                 <i class="fa fa-camera fa-2x"   data-toggle="popover" data-placement="top" 
                                 data-content="Upload Profile Photo" title="Click to upload a new profile photo" data-trigger="hover" onclick="profile_modal()" style="cursor:pointer;background-color: rgb(196, 196, 196);padding: 2mm;border-radius: 1.5rem;margin-bottom:-150px;margin-right:80px;margin-left:-50px"></i>
                             </div>

@@ -237,7 +237,7 @@
                                 </script>
                                 <style>
                                    button.dt-button, div.dt-button, a.dt-button, input.dt-button {
-                                  
+                                    margin-top:10%;
                                   
                                     background-color: #007bff !important;
                                     color: white;

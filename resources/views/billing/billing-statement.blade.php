@@ -25,7 +25,7 @@
                                     <label for="filterMonthYear" style="margin-right:5px;color:rgb(0, 0, 0)" >Select Month and Year: </label>
                                     <input type="month" id="filterMonthYear" style="width: 100%" class="form-control">
                                 </div>
-                                <div class="filter-container" style="margin-top:-20px;margin-bottom:10px;width:200px">
+                                <div class="filter-container" style="position: absolute; right: 30px; margin-top:-20px;margin-bottom:10px;width:200px">
                                     <label for="cluster-filter" style="color:rgb(7, 6, 6)">Select Cluster:</label>
                                     <select id="cluster-filter" class="form-control" style="width:100%">
                                         <option value="">All</option>
