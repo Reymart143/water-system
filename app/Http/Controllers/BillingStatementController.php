@@ -73,7 +73,15 @@ class BillingStatementController extends Controller
                 $join->on('consumer_infos.account_id', '=', 'encoders.account_id')
                     ->whereRaw('encoders.from_reading_date = (SELECT MAX(from_reading_date) FROM encoders WHERE encoders.account_id = consumer_infos.account_id AND DATE_FORMAT(encoders.from_reading_date, "%Y-%m") = ?)', [$selectedMonthYear]);
             })->find($id);
-            $previous_reading = Encoder::where('current_reading' , $billingStatement->previous_reading)->where('account_id', $billingStatement->account_id)->select('from_reading_date as previous_from_reading_date')->first();
+            $previous_reading = Encoder::where('current_reading', $billingStatement->previous_reading)
+            ->where('account_id', $billingStatement->account_id)
+            ->select('from_reading_date as previous_from_reading_date')
+            ->first();
+        
+            if ($previous_reading === null) {
+                
+                $previous_reading = "No previous date";
+            } 
             $billingMonth = BillingMonth::where('status_bill_month', 1)
             ->first();
                     

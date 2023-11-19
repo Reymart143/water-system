@@ -151,12 +151,12 @@
                                                 {
                                                     data: 'collector',
                                                     name: 'collector',
-                                                    visible: false // Hide the 'collector' column
+                                                    visible: false
                                                 },
                                                 {
                                                     data: 'stub_no',
                                                     name: 'stub_no',
-                                                    visible: false // Hide the 'stub_no' column
+                                                    visible: false 
                                                 }
                                             ],
                                             footer: true,
@@ -170,7 +170,7 @@
                                         $('#min, #max').on('change', function () {
                                             var minDate = $('#min').val();
                                             var maxDate = $('#max').val();
-                                            AbstractReceiptdataTable.columns(1).search(minDate + '|' + maxDate, true, false).draw();
+                                            AbstractReceiptdataTable.columns(2).search(minDate + '|' + maxDate, true, false).draw();
                                         });
 
                                         $('#collector-filter').on('change', function () {
@@ -221,8 +221,8 @@
                                                 },
                                                 customize: function (win) {
                                                     
-                                                    $(win.document.body).find('table thead th:nth-child(6), table thead th:nth-child(7)').hide();
-                                                    $(win.document.body).find('table tbody td:nth-child(6), table tbody td:nth-child(7)').hide();
+                                                    $(win.document.body).find('table thead th:nth-child(7), table thead th:nth-child(8)').hide();
+                                                    $(win.document.body).find('table tbody td:nth-child(7), table tbody td:nth-child(8)').hide();
 
                                                   
                                                     $(win.document.body).find('table').append($('#Abstractreceipt_table tfoot').clone());
@@ -237,15 +237,15 @@
                                 </script>
                                 <style>
                                    button.dt-button, div.dt-button, a.dt-button, input.dt-button {
-                                    margin-top:10px;
-                                    margin-right:400px;
+                                  
+                                  
                                     background-color: #007bff !important;
                                     color: white;
                                     padding-left: 40px;
                                     background-size: 30px;
-                                   background-image: url("/image/print.png");
-                                    background-repeat: no-repeat;
-                                    background-position: 10px center;
+                                    background-image: url("/image/print.png");
+                                        background-repeat: no-repeat;
+                                        background-position: 10px center;
                                 }
 
                                     h1 {

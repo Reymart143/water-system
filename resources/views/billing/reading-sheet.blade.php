@@ -14,8 +14,8 @@
                                         <label for="filterMonthYear" style="margin-right:5px;color:rgb(255, 255, 255)" >Select Month and Year: </label>
                                         <input type="month" value="{{ date('Y-m')}}" id="filterMonthYear" style="width: 100%" class="form-control">
                                     </div>
-                                    <div class="filter-container" style="margin-top:20px">
-                                        <label for="cluster-filter" style="color:white">Select Cluster you wanted to print:</label>
+                                    <div class="filter-container" style="margin-top:20px;margin-left:10%">
+                                        <label for="cluster-filter" style="color:white">Select Cluster:</label>
                                         <select id="cluster-filter" class="form-control" style="width:100%">
                                             <option value="">All</option>
                                             @php

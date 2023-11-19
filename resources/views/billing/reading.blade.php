@@ -13,7 +13,7 @@
                         <div class="filter-container" style="margin-left: -5px !important;margin-bottom:50px !important;">
                             <div class="filter-controls col-md-6" style="float: left;display: inline-flex;flex: 1; white-space: nowrap;">
                                 <label for="filterMonthYear" style="color:black;margin-top:5px;margin-right:3px;">Select Month and Year: </label>
-                                <input type="month" id="filterMonthYear" name="filterMonthYear" class="form-control">
+                                <input type="month" id="filterMonthYear" name="filterMonthYear" class="form-control col-md-4">
                             </div>
                             <div class="col-md-4" style="display:inline-flex;float:right;margin-right:-5px;">
                                 <label for="cluster-filter" style="color:black; flex: 1; white-space: nowrap;margin-top:5px;margin-right:3px;">Filter Cluster:</label>

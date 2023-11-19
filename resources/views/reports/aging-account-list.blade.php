@@ -52,11 +52,11 @@
                                         <tr>
                                             <td>Grand Total</td>
                                             <td></td>
-                                            <td >0.00</td>
-                                            <td >0.00</td>
-                                            <td >0.00</td>
-                                            <td>0.00</td>
-                                            <td>0.00</td>
+                                            <td style="text-align: right">0.00</td>
+                                            <td style="text-align: right">0.00</td>
+                                            <td style="text-align: right">0.00</td>
+                                            <td style="text-align: right">0.00</td>
+                                            <td style="text-align: right">0.00</td>
                                         </tr>
                                     </tfoot>
                                 </table>

@@ -71,14 +71,14 @@
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                        <div class="text-center">
-                            <h6 class="mb-1" >MUNICIPAL ECONOMIC ENTERPRISE AND DEVELOPMENT OFFICE</h6>
+                        <div class="text-center" style="font-size: 3mm">
+                            <h5 class="mb-1" >MUNICIPAL ECONOMIC ENTERPRISE AND DEVELOPMENT OFFICE</h5>
                             <h4 class="mb-1">NAAWAN MUNICIPAL WATER SYSTEM</h4>
                             <p class="mb-0" style="color: black">LGU-naawan, Misamis Oriental</p>
                             <h4 class="mt-3">STATEMENT OF ACCOUNT</h4>
                             <p style="color: black">for the month of <span id="month_current_date_cell">[Month]</span></p>
                             <p style="color: black">Covering date of <span id="previous_from_reading_date_cell"></span> to <span id="current_from_reading_date_cell"></span></p>
-                            <p style="color: black">As of Current date: <span id="currentDate">   <script>
+                            <p style="color: black">As of <span id="currentDate">   <script>
                               
                                 var currentDate = new Date();
                             
@@ -494,10 +494,23 @@
                         $('#cluster_cell').text(data.billingStatement.cluster);
                         $('#location_cell').text(data.billingStatement.location);
                         $('#customer_name_cell').text(data.billingStatement.customerName);
-                       
-                        const previousFromDate = new Date(data.previous_reading.previous_from_reading_date);
+                  
                         const options = { year: 'numeric', month: 'long', day: 'numeric' };
-                        const formattedPreviousFromDate = previousFromDate.toLocaleDateString(undefined, options);
+                        if(data.previous_reading.previous_from_reading_date){
+                            const previousFromDate = new Date(data.previous_reading.previous_from_reading_date);
+                           
+                            const formattedPreviousFromDate = previousFromDate.toLocaleDateString(undefined, options);
+                            $('#previous_from_reading_date_cell').text(formattedPreviousFromDate);
+                       
+                        }
+                       else{
+                        const formattedPreviousFromDate = 'No previous date';
+                        $('#previous_from_reading_date_cell').text(formattedPreviousFromDate);
+
+                     }
+                        
+                 
+                       
 
                         
                         const currentFromDate = new Date(data.billingStatement.from_reading_date);
@@ -517,7 +530,7 @@
                         $('#date_delivered_cell').text(formattedDateDelivered); 
                         $('#previous_reading_cell').text(data.billingStatement.previous_reading);
                         $('#current_reading_cell').text(data.billingStatement.current_reading);
-                        $('#previous_from_reading_date_cell').text(formattedPreviousFromDate);
+                      
                         $('#current_from_reading_date_cell').text(formattedCurrentFromDate);
                         $('#month_current_date_cell').text(`${currentMonth} ${currentYear}`);
                         $('#due_date_cell').text(formattedDueDate);

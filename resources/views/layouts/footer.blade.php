@@ -19,6 +19,10 @@
 
         <script src="{{ asset('pluto/js/popper.min.js') }}"></script>
         <script src="{{ asset('pluto/js/bootstrap.min.js') }}"></script>
+   
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
 
         
         
@@ -83,16 +87,25 @@
                                         return '<div style="padding:1mm;text-align:center;border-radius: 4px;color:white;background-color: ' + roles[data].color + '">' + roles[data].name + '</div>';
                                     }
                                 },
+                                // {
+                                //     data: 'image',
+                                //     name: 'image',
+                                //     render: function(data) {
+                                //         var image = '<div class="image-container"><img src="{{ asset('storage/:image') }}" alt class="w-100 h-100 rounded-circle"/></div>';
+                                //         image = image.replace(':image', data);
+                                //         return image;
+                                //     }
+                                // },
                                 {
                                     data: 'image',
                                     name: 'image',
-                                    render: function(data) {
-                                        var image = '<div class="image-container"><img src="{{ asset('storage/:image') }}" alt class="w-100 h-100 rounded-circle"/></div>';
-                                        image = image.replace(':image', data);
+                                    render: function (data) {
+                                        var imageUrl = '{{ asset("storage/:image") }}'.replace(':image', data);
+                                        var image = '<a data-fancybox="gallery" href="' + imageUrl + '"><div class="image-container"><img src="' + imageUrl + '" alt class="w-100 h-100 rounded-circle"/></div></a>';
                                         return image;
                                     }
                                 },
-                                
+
                               
                                 {
                                     data: 'name',

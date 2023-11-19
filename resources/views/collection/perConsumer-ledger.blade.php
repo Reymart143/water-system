@@ -48,8 +48,8 @@
                             <table id="consumerledger_table" class="display table table-bordered" style="color: black !important; width: 100% !important;">
                                 <thead>
                                     <tr>
-                                        <th>Transact Date</th>
-                                        <th>Particular</th>
+                                        <th >Transact Date</th>
+                                        <th >Particular</th>
                                         <th>OR NO</th>
                                         <th>Issuance</th>
                                         <th>Collection</th>
@@ -64,9 +64,9 @@
                                         <td>Grand Total</td>
                                         <td></td>
                                         <td></td>
-                                        <td >{{ number_format($grand_total_issuance[0]->total_issuance, 2) }}</td>
-                                        <td >{{ number_format($grand_total_collection[0]->total_collection, 2) }}</td>
-                                        <td>{{ number_format($grand_total_balance, 2) }}</td>
+                                        <td style="text-align: right">{{ number_format($grand_total_issuance[0]->total_issuance, 2) }}</td>
+                                        <td style="text-align: right">{{ number_format($grand_total_collection[0]->total_collection, 2) }}</td>
+                                        <td style="text-align: right">{{ number_format($grand_total_balance, 2) }}</td>
                                     </tr>
                                 </tfoot>
                             </table>
@@ -98,16 +98,28 @@
                                             },
                                             {
                                                 data: 'or_no',
-                                                name: 'or_no'
+                                                name: 'or_no',
+                                                render: function(data) {
+                                                    if(data){
+                                                        return '<div style="flex: 1; white-space: nowrap;text-align:right">' + data + '</div>';
+                                                    }else{
+                                                        return '<div style="flex: 1; white-space: nowrap;text-align:right"></div>';
+                                                    }
+                                                }
                                             },
                                             {
                                                 data: 'issuance',
                                                 name: 'issuance',
                                                 render: function (data, type, row) {
                                                     if (row.particular && row.particular.startsWith('Discount - ')) {
-                                                        return '(' + parseFloat(data).toFixed(2) + ')';
+                                                        return '<div style="flex: 1; white-space: nowrap;text-align:right">' + '(' + parseFloat(data).toFixed(2) + ')' + '</div>';
                                                     }
-                                                    return data;
+                                                    if(data){
+                                                        return '<div style="flex: 1; white-space: nowrap;text-align:right">' + data + '</div>';
+                                                    }else{
+                                                        return '<div style="flex: 1; white-space: nowrap;text-align:right"></div>';
+                                                    }
+                                                    
                                                 }
                                             },
                                             {
@@ -115,7 +127,11 @@
                                                 name: 'collection',
                                                 render: function (data, type, row) {
                                                    
-                                                    return data;
+                                                    if(data){
+                                                        return '<div style="flex: 1; white-space: nowrap;text-align:right">' + data + '</div>';
+                                                    }else{
+                                                        return '<div style="flex: 1; white-space: nowrap;text-align:right"></div>';
+                                                    }
                                                 }
                                             },
                                             {
@@ -125,7 +141,11 @@
                                                     if (typeof data === 'number') {
                                                         return data.toFixed(2);
                                                     }
-                                                    return data; 
+                                                    if(data){
+                                                        return '<div style="flex: 1; white-space: nowrap;text-align:right">' + data + '</div>';
+                                                    }else{
+                                                        return '<div style="flex: 1; white-space: nowrap;text-align:right"></div>';
+                                                    }
                                                 }
                                             }
                                         ]
@@ -152,34 +172,53 @@
                                         var tableContent = document.getElementById('consumerledger_table').outerHTML;
                                         var customStyles = `
                                         <style>
-                                            th {
-                                                text-align: left !important;
+                                            #consumerledger_table {
+                                               
+                                                border-collapse: collapse;
+                                                width: 100%;
+                                                border: 1px solid black;
                                             }
+
+                                            #consumerledger_table th,
+                                            #consumerledger_table td {
+                                                border: 1px solid black; 
+                                                padding:3px;
+                                            }
+
                                             #consumerledger_table td.issuance,
+                                            #consumerledger_table td.or_no,
                                             #consumerledger_table td.collection,
                                             #consumerledger_table td.balance,
                                             #consumerledger_table td.transact,
                                             #consumerledger_table td.particular {
                                                 text-align: center;
                                             }
+
+                                            #consumerledger_table th.transact,
+                                            #consumerledger_table th.particular {
+                                                text-align: left;
+                                            }
+
                                             h2 {
                                                 margin-right: 20px;
-                                                border-right: 1px solid black;
                                                 padding-right: 20px;
                                             }
+
                                             h4 {
                                                 padding-bottom: 10px;
                                             }
+
                                             tfoot td {
                                                 border-top: 1px solid black;
-                                                text-align: left !important;
-
+                                                text-align: right !important;
                                             }
+
                                             #consumerledger_table tbody {
-                                                margin-left: 50px; 
-                                                
+                                               
+                                                margin-left: 50px;
                                             }
                                         </style>
+
                                     `;
 
                                         printWindow.document.write('<html><head style="text-align:left"><title >Water Consumer Ledger</title>');

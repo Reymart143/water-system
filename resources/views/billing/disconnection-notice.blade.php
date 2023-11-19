@@ -27,12 +27,12 @@
                                 </div>
                                 <div class="card-body">
                                 
-                                    <div class="col-md-4 " style="margin-left:300px">
+                                    <div class="col-md-4 " style="margin-left:33%">
                                         <label for="date-input">As of:</label>
                                         <input type="date" name="asof_date" class="form-control" id="asof_date">
                                     </div>
-                                    <div class="col-md-6" style="margin-left:300px">
-                                        <label for="cluster_selected" style="color: rgb(9, 9, 9);margin-right:150px">Cluster:</label>
+                                    <div class="col-md-6" style="margin-left:33%">
+                                        <label for="cluster_selected" style="color: rgb(9, 9, 9);margin-right:37%">Cluster:</label>
                                         <select id="cluster_selected" name="cluster_selected" class="form-control" style="width: 64%">
                                             <option value="">All</option>
                                             @php
@@ -45,8 +45,8 @@
                                             @endforeach
                                         </select>
                                     </div>
-                                    <div class="col-md-6" style="margin-left:300px">
-                                        <label for="customer_selected" style="color: rgb(0, 0, 0);margin-right:150px">Customer:</label>
+                                    <div class="col-md-6" style="margin-left:33%">
+                                        <label for="customer_selected" style="color: rgb(0, 0, 0);margin-right:37%">Customer:</label>
                                         <select id="customer_selected" name="customer_selected" class="form-control" style="width: 64%">
                                             <option value="">All</option>
                                             @php

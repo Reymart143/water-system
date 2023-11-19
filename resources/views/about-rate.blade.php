@@ -15,12 +15,13 @@
           <!-- billing rate table section -->
           <div class="col-md-12">
              <div class="white_shd full margin_bottom_30">
-                <div class="full graph_head">
-                   <div class="heading1 margin_0" style="display: inline-flex; ">
-                      <h2>Billing Rate</h2>
-                      <button class="btn btn-info" onclick="openBillingModal()" style="margin-left: 580px;"> Add billing rate</button>
-                   </div>
+                <div class="full graph_head" style="position: relative;">
+                    <div class="heading1 margin_0" style="display: inline-flex; ">
+                        <h2 style="margin: 0;">Billing Rate</h2>
+                        <button class="btn btn-info" onclick="openBillingModal()" style="position: absolute; right: 38px;">Add billing rate</button>
+                    </div>
                 </div>
+                
                 {{-- modal for billing rate --}}
                 <div class="modal fade" id="rateBillingModal" tabindex="-1" role="dialog" aria-labelledby="rateBillingModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
@@ -467,7 +468,7 @@
                 <div class="full graph_head">
                     <div class="heading1 margin_0" style="display: inline-flex; ">
                         <h2>Penalty Rate</h2>
-                        <button class="btn btn-info" style="margin-left: 550px" onclick="penaltyrate()">Add penalty rate</button>
+                        <button class="btn btn-info" style="position: absolute; right: 38px;" onclick="penaltyrate()">Add penalty rate</button>
                     </div>
 
                     {{-- modal for billing rate --}}
@@ -816,7 +817,7 @@
                 <div class="full graph_head">
                     <div class="heading1 margin_0" style="display: inline-flex; ">
                         <h2>Discount Rate</h2>
-                        <button class="btn btn-info" style="margin-left: 540px" onclick="discountrate()">Add discount rate</button>
+                        <button class="btn btn-info" style="position: absolute; right: 38px;" onclick="discountrate()">Add discount rate</button>
                     </div>
                 </div>
                 
@@ -1250,7 +1251,7 @@
                 <div class="full graph_head">
                     <div class="heading1 margin_0" style="display: inline-flex">
                         <h2><i class="fa fa-calendar"></i> Non-working holidays</h2>
-                        <button class="btn btn-info" style="margin-left:470px;" onclick="holiday()">Add Holiday</button>
+                        <button class="btn btn-info" style="position: absolute; right: 38px;" onclick="holiday()">Add Holiday</button>
                     </div>
                 </div>
                 <div class="table_section padding_infor_info">
