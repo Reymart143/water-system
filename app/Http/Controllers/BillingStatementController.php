@@ -129,17 +129,26 @@ class BillingStatementController extends Controller
                         ->sum('balance'),
                     2 
                 );
-                $Discount = number_format(
-                    AccountReceivable::where('account_type', 'Discount')
-                        ->where('account_id', $billingStatement->account_id)
-                        
-                        ->sum('balance'),
-                    2 
-                );
+                $date = AccountReceivable::select('date')
+                    ->where('account_id', $billingStatement->account_id)
+                    ->where('account_type', 'Discount')
+                    ->get();
+             
+                    $Discount = number_format(
+                        AccountReceivable::where('account_type', 'Discount')
+                            ->where('account_id', $billingStatement->account_id)
+                            ->whereRaw('DATE_FORMAT(date, "%Y-%m") = ?', [$selectedMonthYear])
+                            ->sum('balance'),
+                        2
+                    );
+                    
+                    // dd($Discount);
+                    
                 $billingStatement->water_bill_arrears = $waterBillArrears;
                 $billingStatement->watershed_arrears = $watershedArrears;
                 $billingStatement->surcharge_arrears = $Surcharge;
                 $billingStatement->discount_arrears = $Discount;
+             
             return response()->json([
                 'billingStatement'=>$billingStatement,
                 'previous_reading'=>$previous_reading
