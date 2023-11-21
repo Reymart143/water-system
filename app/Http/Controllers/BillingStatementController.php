@@ -129,10 +129,6 @@ class BillingStatementController extends Controller
                         ->sum('balance'),
                     2 
                 );
-                $date = AccountReceivable::select('date')
-                    ->where('account_id', $billingStatement->account_id)
-                    ->where('account_type', 'Discount')
-                    ->get();
              
                     $Discount = number_format(
                         AccountReceivable::where('account_type', 'Discount')
