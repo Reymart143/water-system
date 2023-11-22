@@ -1,6 +1,7 @@
 @extends('layouts.dash')
 
 @section('content')
+
 <div class="midde_cont">
     <div class="container-fluid">
         <div class="row column1">
@@ -249,7 +250,14 @@
 </div>
 <script>
     $(document).ready(function() {
-
+    
+        $('#cluster-filter').chosen({
+            search_contains: true,
+            allow_single_deselect: true
+        });
+    });
+    $(document).ready(function() {
+      
                 $('#reading_table').DataTable({
                     "columnDefs": [
                         { 

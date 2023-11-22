@@ -144,23 +144,31 @@
     const classificationFilter = document.getElementById('classification-filter');
     const tableRows = document.querySelectorAll('.table tbody tr');
 
-
     classificationFilter.addEventListener('change', function () {
-        const selectedClassification = classificationFilter.value.toLowerCase(); 
+        const selectedClassification = classificationFilter.value.toLowerCase();
+        let foundData = false;
 
-     
         tableRows.forEach((row) => {
-            const classificationCell = row.querySelector('td:nth-child(4)'); 
-
-      
+            const classificationCell = row.querySelector('td:nth-child(4)');
             const rowClassification = classificationCell.textContent.trim().toLowerCase();
 
             if (selectedClassification === '' || rowClassification === selectedClassification) {
-                row.style.display = ''; 
+                row.style.display = '';
+                foundData = true;
             } else {
-                row.style.display = 'none'; 
+                row.style.display = 'none';
             }
         });
+
+
+        if (!foundData) {
+            Swal.fire({
+                title: "No data found",
+                text: "No customer found in this classification",
+                icon: "error"
+                });
+     
+        }
     });
 </script>
 <style>

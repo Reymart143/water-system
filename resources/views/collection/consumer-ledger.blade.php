@@ -1,6 +1,9 @@
 @extends('layouts.dash')
 
 @section('content')
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/chosen-js@1.8.7/chosen.min.css">
+<script src="https://cdn.jsdelivr.net/npm/chosen-js@1.8.7/chosen.jquery.min.js"></script>
+
     <div class="midde_cont">
         <div class="container-fluid">
             <div class="row column1">
@@ -51,6 +54,13 @@
             </div>
             {{-- MODAL CONTENT --}}
           <script>
+            // $(document).ready(function() {
+                
+            //     $('#cluster-filter').chosen({
+            //         search_contains: true,
+            //         allow_single_deselect: true
+            //     });
+            // });
                  $(document).ready(function(){
                     var LedgerdataTable = $('#consumerledger_table').DataTable({
                         "processing": true,

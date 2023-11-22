@@ -1,6 +1,7 @@
 @extends('layouts.dash')
 
 @section('content')
+
     <div class="midde_cont">
         <div class="container-fluid">
             <div class="row column1">
@@ -66,7 +67,14 @@
                 </div>
                 {{-- MODAL CONTENT --}}
                 <script>
+                //     $(document).ready(function() {
+                //         $('#customer-filter').chosen({
+                //         search_contains: true,
+                //         allow_single_deselect: true
+                //     });
+                //   });
                 $(document).ready(function() {
+                   
                     var AgingdataTable = $('#aging_table').DataTable({
                         responsive: true,
                         paging: true,
