@@ -44,12 +44,26 @@ class AccountReceivableController extends Controller
             $user = DB::table('consumer_infos')
             ->select('customerName', 'account_id')
             ->where('account_id', $account_id)
-        
             ->first();
-             $ledgerConsumer = DB::table('account_receivables')->select('id','date','account_type','balance','item_name','isPaid')->where('account_id', $user->account_id)->get();
-              $totalIsPaid = DB::table('account_receivables')->whereNot('balance', 0)->where('isPaid',1)->where('account_id', $user->account_id)->count();
-              $totalIsNotPaid = DB::table('account_receivables')->whereNot('balance', 0)->where('isPaid',0)->where('account_id', $user->account_id)->count();
-            return view('collection.perUserAccount-receivables', compact('user','ledgerConsumer','totalIsPaid','totalIsNotPaid'));
+
+             $ledgerConsumer = DB::table('account_receivables')
+             ->select('id','date','account_type','balance','item_name','isPaid')
+             ->whereNot('balance',0)->where('account_id', $user->account_id)
+             ->get();
+              $totalIsPaid = DB::table('account_receivables')
+              ->whereNot('balance', 0)
+              ->where('isPaid',1)->where('account_id', $user->account_id)
+              ->count();
+              $totalIsNotPaid = DB::table('account_receivables')
+              ->whereNot('balance', 0)->where('isPaid',0)
+              ->where('account_id', $user->account_id)->count();
+              $grandTotalBalance = DB::table('account_receivables')
+              ->whereNot('balance', 0)->where('isPaid',0)
+              ->where('account_id', $user->account_id)
+              ->sum('balance');
+              
+              return view('collection.perUserAccount-receivables', compact('user','grandTotalBalance','ledgerConsumer','totalIsPaid','totalIsNotPaid'));
+        
         }
     
        

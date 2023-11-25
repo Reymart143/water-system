@@ -25,7 +25,9 @@ class TreasurerReceipt extends Model
         'money_checkbox',
         'money_order_number',
         'money_order_date',
-        'collector'
+        'collector',
+        'collection_bill',
+        'Total_balance'
     ];
     public function consumerInfo()
     {

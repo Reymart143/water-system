@@ -180,21 +180,7 @@
                                         
                                     </tr>
                                 </thead>
-                                {{-- <tbody>
-                                   @foreach ($waterbill as $not)
-                                   <tr>
-                                    <td>
-                                        <input type="checkbox" style="width: 30px;height:30px;padding-left:3mm;padding-right:3mm" class="form-control" id="selected_items[]" name="selected_items[]" value="{{$not->id}}" class="larger-checkbox">
-                                    </td>
-                                            
-                                        <td><input type="string" class="form-control" style="width:160px" id="date" name="date" value="{{ date('F j, Y', strtotime($not->date)) }}" readonly></td>
-                                        <td ><input type="text" class="form-control" style="width:130px" id="account_type" name="account_type" value="{{$not->account_type}}" readonly></td>
-                                        <td ><input type="text" class="form-control" style="width:120px" id="item_name" name="item_name" value="{{$not->item_name}}" readonly></td>
-                                        <td ><input type="text" class="form-control" style="width:120px" id="balance" name="balance" value="{{$not->balance}}" readonly></td>
-                                    </tr>
-                                  
-                                   @endforeach
-                                </tbody> --}}
+                               
                                 <script>
                                     $(document).ready(function() {
                                     const sheetlistTable = $('#forReceiptLedger_table').DataTable({
@@ -276,6 +262,7 @@
                                                
                                                 sheetlistTable.on('draw', function() {
                                                     calculateTotalAmount();
+                                                    updateAmountInputStatus(); 
                                                 });
 
                                            
@@ -316,6 +303,13 @@
                                                     $('#collection_bill').val(totalAmount.toFixed(2)); 
                                                     updateTotalBalance();
                                                 }
+                                                function updateAmountInputStatus() {
+                                               
+                                                const hasBalance = sheetlistTable.rows().data().toArray().some(function(row) {
+                                                    return row.account_type === 'Balance';
+                                                });
+                                                $('#collection_bill').prop('disabled', hasBalance);
+                                            }
                                 });
                                 </script>
                                 
@@ -339,14 +333,12 @@
                             </div>   
                             <div class="row">
                                   <div class="col-md-4"></div>
-                                <div class="col-md-4">
-                                    <label for="totalAmount" style="line-height: 2.5; margin-left:90px !important;">Enter Amount:</label>
-                                </div>
-                                
-                                <div class="col-md-4">
-                                    <input type="text" class="form-control" id="collection_bill" name="collection_bill">
-                                </div>
-                               
+                                    <div class="col-md-4">
+                                        <label for="totalAmount" style="line-height: 2.5; margin-left:90px !important;">Enter Amount:</label>
+                                    </div>  
+                                    <div class="col-md-4">
+                                        <input type="text" class="form-control" id="collection_bill" name="collection_bill" disabled>
+                                    </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-4"></div>
@@ -579,7 +571,7 @@
                                         'success'
                                     ).then(() => {
 
-                                        $('#penaltyrate_Table').DataTable().ajax.reload();
+                                        $('#forReceiptLedger_table').DataTable().ajax.reload();
                                     });
                                 },
                                 error: function(xhr, status, error) {

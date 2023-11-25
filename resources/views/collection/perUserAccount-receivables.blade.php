@@ -47,34 +47,43 @@
                                 <table id="consumerledger_table" class="display table table-bordered" style="color: black !important; width: 100% !important;">
                                     <thead>
                                         <tr>
-                                            <th>Status</th>
+                                            <th style="text-align: center">Status</th>
                                             <th>Account Date</th>
                                             <th>Account type name</th>
                                             <th>Item name</th>
-                                            <th>Amount</th>
+                                            <th >Amount</th>
+                                           
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach ($ledgerConsumer as $item)
                                         <tr>
-                                            <td> 
-                                                @if($item->balance == 0)
-                                                    <span class="badge badge-danger"><i class="fa fa-close"></i> No reading</span>
-                                                @else
-                                                    @if ($item->isPaid == 0)
-                                                        <span class="badge badge-danger"><i class="fa fa-exclamation-triangle"></i> Unpaid</span>
+                                            <td style="text-align: center"> 
+                                                @if($item->isPaid == 3)
+                                                    <span class="badge badge-info" style="width:50%;padding:5%"><i class="fa fa-check"></i> Partial Paid</span>
                                                     @else
-                                                        <span class="badge badge-success"><i class="fa fa-check-circle"></i> Paid</span>
+                                                    @if ($item->isPaid == 0)
+                                                        <span class="badge badge-danger" style="width:50%;padding:5%"><i class="fa fa-exclamation-triangle"></i> Unpaid</span>
+                                                    @else
+                                                        <span class="badge badge-success" style="width:50%;padding:5%"><i class="fa fa-check-circle"></i> Paid</span>
                                                     @endif
                                                 @endif
                                             </td>
                                             <td>{{ date('F j, Y', strtotime($item->date)) }}</td>
                                             <td>{{ $item->account_type }}</td>
                                             <td>{{ $item->item_name }}</td>
-                                            <td>{{ $item->balance }}</td>
+                                            <td style="text-align: right">{{ $item->balance }}</td>
+                                         
                                         </tr>
                                         @endforeach
                                     </tbody>
+                                    <tfoot>
+                                        <td style="background-color: #007bff;color:white">Grand total Balance </td>
+                                        <td ></td>
+                                        <td ></td>
+                                        <td ></td>
+                                        <td style="background-color: #007bff;color:white;text-align: right;font-size:bold">{{number_format($grandTotalBalance,2)}}</td>
+                                    </tfoot>
                                 </table>
                                 
                             </div>

@@ -79,7 +79,7 @@ class TreasurerReceiptController extends Controller
                         }else{
                             $button = '
                             <input type="hidden" id="account_' . $waterbill->id . '" value="' . $waterbill->account_type . '" data-name="' . $waterbill->item_name . '" />
-                            <button type="button" name="softDelete" onclick="Delete(' . $waterbill->id . ')" class="action-button softDelete btn btn-danger btn-sm" style="padding-top: 2mm;padding-bottom: 2mm; padding-left: 4mm; padding-right: 4mm;font-size: 10px;">
+                            <button type="button" name="softDelete" onclick="Delete(' . $waterbill->id . ')" class="action-button softDelete btn btn-secondary btn-sm" style="padding-top: 2mm;padding-bottom: 2mm; padding-left: 4mm; padding-right: 4mm;font-size: 10px;">
                             <i class="fa fa-trash-o"></i>
                             <span class="action-text" style="font-size:10px">Delete</span>
                         </button>
@@ -110,7 +110,7 @@ class TreasurerReceiptController extends Controller
                 ->select('id', 'account_type', 'item_name', 'balance', 'date')
                 ->where('balance', '!=', 0)
                 ->where('account_id', $request->account_id)
-                ->where('isPaid',0) 
+                ->whereIn('isPaid', [0, 3]) 
                 ->get();
 
             return datatables()->of($receivables)->addIndexColumn()
@@ -140,11 +140,11 @@ class TreasurerReceiptController extends Controller
             $currentDate = Carbon::now()->format('Y-m-d');
         
             $waterbill = DB::table('account_receivables')
-                ->select('id', 'account_type', 'item_name', 'balance', 'date')
-                ->where('balance', '!=', 0)
-                ->where('account_id', $user->account_id)
-                ->whereNot('isPaid', 1)
-                ->get();
+            ->select('id', 'account_type', 'item_name', 'balance', 'date')
+            ->where('balance', '!=', 0)
+            ->where('account_id', $user->account_id)
+            ->whereNotIn('isPaid', [1, 3]) 
+            ->get();
         
             
             $PenaltyRate = null;
@@ -210,14 +210,15 @@ class TreasurerReceiptController extends Controller
             ]);
         }
         public function AddedToReceipt(Request $request) {
+          
             
             $selectedItems = $request->input('selectedItems');
             foreach ($selectedItems as $itemId) {
                 $selectedItem = AccountReceivable::find($itemId);
               
                 if ($selectedItem) {
-
-
+                  
+                  if ($selectedItem->account_type != 'Balance') {
                     if ($selectedItem->account_type != 'Watershed') {
                         $billingMonth = BillingMonth::where('status_bill_month', 1)->first();
         
@@ -257,6 +258,7 @@ class TreasurerReceiptController extends Controller
                                 
                             }
                         }
+                      }
                     }
                 }
             }
@@ -324,7 +326,26 @@ class TreasurerReceiptController extends Controller
             
 
             $selectedData = $request->input('selected_data', []);
+            $waterBillItemNames = [];
+            foreach ($selectedData as $data) {
+                if ($data['account_type'] === 'Water Bill') {
+                    $waterBillItemNames[] = $data['item_name'];
+                }
+            }
            
+            $itemName = implode(', ', $waterBillItemNames);
+            if($request->Total_balance != 0){
+                AccountReceivable::create([
+                    'account_id' => $request->account_id,
+                    'item_name' => $itemName,
+                    'account_type' => 'Balance',
+                    'date' => date('Y-m-d', strtotime($request->receiptcurrentDate)),
+                    'balance' => $request->Total_balance,
+                    'isPaid' => 3,
+                ]);
+            }
+            
+          
             foreach ($selectedData as $data) {
              
        
@@ -356,10 +377,9 @@ class TreasurerReceiptController extends Controller
         
         private function getRecNo()
         {
-           
             $lastReceiptID     = DB::table('treasurer_receipts')->pluck('receiptID')->last();
             $lastIncrementPart = preg_replace('/[^0-9]/', '', $lastReceiptID);       
-            $newIncrementPart  = $lastIncrementPart + 1;     
+            $newIncrementPart  = intval($lastIncrementPart) + 1;     
             $newreceiptID      = str_pad($newIncrementPart, 2, '0', STR_PAD_LEFT);
         
             return $newreceiptID;
@@ -414,7 +434,22 @@ class TreasurerReceiptController extends Controller
                 return view('collection.AbstractCollection');
             }
             
-            
+            public function Delete($id)
+            {
+                return view('confirm-delete', ['id' => $id]);
+            }
+            public function discountDelete($id)
+                {
+                    try {
+                        $user = AccountReceivable::findOrFail($id);
+                        $user->delete();
+                        return response()->json(['message' => 'Penalty deleted successfully']);
+                    } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+                        return response()->json(['error' => 'Penalty not found'], 404);
+                    } catch (\Exception $e) {
+                        return response()->json(['error' => 'An error occurred while deleting the Penalty'], 500);
+                    }
+                }
             
             
 }   

@@ -188,6 +188,7 @@ Route::middleware('isTreasurer')->group(function(){
     Route::get('/view', [TreasurerReceiptController::class, 'receivable']);
     Route::post('/addedToReceipt', [TreasurerReceiptController::class, 'AddedToReceipt']);
     Route::post('/backToReceivable', [TreasurerReceiptController::class, 'updateToReceivable']);
+    Route::delete('deleteDisc/{id}', [TreasurerReceiptController::class, 'discountDelete']);
 });
 //for Assessor view
 Route::middleware('isAssessor')->group(function(){
